@@ -4,4 +4,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BasicCRUD.CORE\BasicCRUD.Core.csproj" />
+    <ProjectReference Include="..\BasicCRUD.DataAccess\BasicCRUD.DataAccess.csproj" />
+    <ProjectReference Include="..\BasicCRUD.Entities\BasicCRUD.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

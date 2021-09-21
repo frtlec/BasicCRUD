@@ -15,51 +15,54 @@ namespace BasicCRUD.Core.DataAccess.EfCore
     {
 
 
-        public TEntity Get(Expression<Func<TEntity, bool>> filter)
+        public async Task<TEntity> Get(Expression<Func<TEntity, bool>> filter)
         {
+            
             using (var context = new TContext())
             {
-                return context.Set<TEntity>().SingleOrDefault(filter);
+               
+                return await context.Set<TEntity>().SingleOrDefaultAsync(filter);
             }
         }
 
-        public IList<TEntity> GetList(Expression<Func<TEntity, bool>> filter = null)
+        public async Task<IList<TEntity>> GetList(Expression<Func<TEntity, bool>> filter = null)
         {
             using (var context = new TContext())
             {
                 return filter == null ?
-                     context.Set<TEntity>().ToList() :
-                     context.Set<TEntity>().Where(filter).ToList();
+                     await context.Set<TEntity>().ToListAsync() :
+                     await context.Set<TEntity>().Where(filter).ToListAsync();
             }
         }
 
-        public void Add(TEntity entity)
+        public async Task Add(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = EntityState.Added;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public void Delete(TEntity entity)
+        public async Task Delete(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var deletedEntity = context.Entry(entity);
                 deletedEntity.State = EntityState.Deleted;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
 
-        public void Update(TEntity entity)
+        public async Task Update(TEntity entity)
         {
             using (var context = new TContext())
             {
                 var updatedEntity = context.Entry(entity);
                 updatedEntity.State = EntityState.Modified;
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
         }
     }
+}

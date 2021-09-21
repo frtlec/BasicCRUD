@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BasicCRUD.Core.Utilities.Results
+namespace BasicCRUD.Core.Entities
 {
-    public class NoContent
+    public interface IDtos
     {
     }
 }

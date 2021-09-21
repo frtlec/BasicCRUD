@@ -1,4 +1,5 @@
 ﻿using BasicCRUD.Core.DataAccess;
+using BasicCRUD.Entities.Concrete.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
