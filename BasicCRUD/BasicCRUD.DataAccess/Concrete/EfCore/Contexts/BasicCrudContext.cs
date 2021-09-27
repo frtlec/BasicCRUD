@@ -28,6 +28,7 @@ namespace BasicCRUD.DataAccess.Concrete.EfCore.Contexts
             }
         }
         public DbSet<Product> Products { get; set; }
+        public DbSet<AppLog> AppLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

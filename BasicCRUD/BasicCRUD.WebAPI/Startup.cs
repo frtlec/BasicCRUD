@@ -1,10 +1,12 @@
 using BasicCRUD.Business.Abstract;
 using BasicCRUD.Business.Concrete;
+using BasicCRUD.Business.Utilities.Logger;
 using BasicCRUD.Core.Utilities.Security.Encyption;
 using BasicCRUD.Core.Utilities.Security.JWT;
 using BasicCRUD.DataAccess.Abstract;
 using BasicCRUD.DataAccess.Concrete.EfCore;
 using BasicCRUD.DataAccess.Concrete.EfCore.Contexts;
+using BasicCRUD.WebAPI.Middleware;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,8 +40,10 @@ namespace BasicCRUD.WebAPI
             services.AddDbContext<BasicCrudContext>();
 
             services.AddScoped<IProductDal, EfProductDal>();
+            services.AddScoped<IAppLogDal, EfAppLogDal>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ILoggerManager, LoggerManager>();
             services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
             {
                 builder.AllowAnyOrigin()
@@ -61,6 +65,7 @@ namespace BasicCRUD.WebAPI
                         IssuerSigningKey = SecurityKeyHelper.CreateSecurityKey(tokenOptions.SecurityKey)
                     };
                 });
+            services.AddHttpContextAccessor();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -77,12 +82,14 @@ namespace BasicCRUD.WebAPI
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BasicCRUD.WebAPI v1"));
             }
-
+            
             app.UseRouting();
             app.UseCors("MyPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseMiddleware<LoggerMiddleware>();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();

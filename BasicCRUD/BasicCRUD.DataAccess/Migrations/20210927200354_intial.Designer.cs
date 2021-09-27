@@ -4,14 +4,16 @@ using BasicCRUD.DataAccess.Concrete.EfCore.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BasicCRUD.DataAccess.Migrations
 {
     [DbContext(typeof(BasicCrudContext))]
-    partial class BasicCrudContextModelSnapshot : ModelSnapshot
+    [Migration("20210927200354_intial")]
+    partial class intial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,6 +32,9 @@ namespace BasicCRUD.DataAccess.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Data")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullMethodName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("LogInfo")

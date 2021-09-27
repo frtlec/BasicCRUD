@@ -49,10 +49,12 @@ namespace BasicCRUD.Business.Concrete
 
         public async Task<Response<List<GetAllProductDto>>> GetAllProducts()
         {
+            throw new Exception("trsada");
             try
             {
                 var result= await _productDal.GetList();
                 var products = ObjectMapper.Mapper.Map<List<GetAllProductDto>>(result);
+              
                 return Response<List<GetAllProductDto>>.Success(products, 200);
             }
             catch (Exception ex)
