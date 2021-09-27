@@ -25,7 +25,7 @@ namespace BasicCRUD.Business.Concrete
             {
                 var product = ObjectMapper.Mapper.Map<Product>(productDto);
                 await _productDal.Add(product);
-                return  Response<NoContent>.Success(204);
+                return  Response<NoContent>.Success(201);
             }
             catch (Exception ex)
             {

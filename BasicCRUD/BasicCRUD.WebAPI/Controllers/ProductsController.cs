@@ -1,6 +1,7 @@
 ﻿using BasicCRUD.Business.Abstract;
 using BasicCRUD.Entities.Concrete.Dtos;
 using BasicCRUD.WebAPI.Controllers.BasesController;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -13,6 +14,7 @@ namespace BasicCRUD.WebAPI.Controllers
     //-api/products/getall
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductsController : CustomBaseController
     {
         private readonly IProductService _productService;
