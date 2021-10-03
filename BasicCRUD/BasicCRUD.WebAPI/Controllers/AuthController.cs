@@ -24,7 +24,8 @@ namespace BasicCRUD.WebAPI.Controllers
         [HttpPost]
         public IActionResult GetToken(UserLoginDto user)
         {
-            return CreateActionResultInstance(_authService.GetToken(user));
+            var result = _authService.GetToken(user);
+            return CreateActionResultInstance(result);
         }
     }
 }

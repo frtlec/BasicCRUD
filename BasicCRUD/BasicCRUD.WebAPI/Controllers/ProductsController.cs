@@ -20,7 +20,7 @@ namespace BasicCRUD.WebAPI.Controllers
     //-api/products/getall
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ProductsController : CustomBaseController
     {
         private readonly IProductService _productService;

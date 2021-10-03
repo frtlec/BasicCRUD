@@ -28,7 +28,7 @@ namespace BasicCRUD.WebAPI.Middleware
             LogData logData = null;
             try
             {
-               logData = new(context);
+            
                 using (var memStream = new MemoryStream())
                 {
                     Stream originalResponseBody = context.Response.Body;
@@ -36,7 +36,7 @@ namespace BasicCRUD.WebAPI.Middleware
                     context.Response.Body = replacementResponseBody;
 
                     await _next(context);
-
+                    logData = new(context);
                     replacementResponseBody.Position = 0;
                     await replacementResponseBody.CopyToAsync(originalResponseBody).ConfigureAwait(false);
                     context.Response.Body = originalResponseBody;

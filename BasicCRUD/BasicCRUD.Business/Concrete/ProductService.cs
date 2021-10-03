@@ -49,7 +49,7 @@ namespace BasicCRUD.Business.Concrete
 
         public async Task<Response<List<GetAllProductDto>>> GetAllProducts()
         {
-            throw new Exception("trsada");
+          
             try
             {
                 var result= await _productDal.GetList();
